@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>убежище программиста</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqk1wM+h/L+j/yTDt5p0Nyy+0308+PHcCUgS57G1Q+0yPk03wZGK8370tR3Q+6cTf/RJn+m//h"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #services {
+            background-color: #f2f2f2; /* Light background for services */
+        }
+        #skills {
+            background-color: #fff; /* White background for skills */
+        }
+        .skill-description {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px; /* Add some spacing between image and text */
+        }
+        .carousel-item {
+            text-align: center;
+        }
+        .carousel-item img {
+            max-width: 100%;
+            height: auto; /* Keep aspect ratio */
+            margin: 0 auto; /* Center the image */
+            background-color: transparent; /* Удаление фона */
+        }
+        .carousel-caption {
+            position: relative;
+            bottom: 0; /* Ensure caption stays below image */
+            left: 0;
+            width: 100%;
+        }
+        .carousel-inner {
+            background-color: #f2f2f2; /* Or your desired background color */
+        }
+
+        /* Contact Section Styles */
+        #contact ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+        }
+
+        #contact li {
+            margin-bottom: 10px; /* Add spacing between list items */
+        }
+
+        @media (min-width: 768px) { /* Desktop styles */
+            #contact ul {
+                text-align: left; /* Align left on desktop */
+            }
+
+            #contact li {
+                font-size: 1.2em;
+                font-family: 'Arial', sans-serif;
+                /* Add some font styling */
+            }
+        }
+
+        @media (max-width: 767px) { /* Mobile styles */
+            #contact ul {
+                text-align: center; /* Center on mobile */
+            }
+
+            #contact li {
+                font-size: 1.1em;
+                font-family: 'Arial', sans-serif; /* Add some font styling */
+            }
+        }
+
+        /* Services Card Hover Effect */
+        @media (min-width: 992px) { /* Apply hover effect for laptops and desktops */
+            .col-md-4 .card:hover {
+                transform: translateY(-15px); /* Move up slightly on hover */
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+                border-radius: 60px;
+                border-color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Main</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="container mt-5" id="home">
+            <h1 class="text-center mb-4">Обо мне</h1>
+            <p class="text-center">
+                Я молодой фронтенд разработчик с опытом 3 лет разработки клентских веб-приложений и веб сайтов разной сложности. увлекаюсь нейросетями и ИИ а также имел опыт разработки небольших моделей машинного обучения на python(scikit-learn)
+            </p>
+        </section>
+
+        <section class="container mt-5" id="services">
+            <h1 class="text-center mb-4">Услуги</h1>
+            <div class="row">
+                <div class="col-md-4 mb-4" v-for="(service, index) in services" :key="index">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ service.title }}</h5>
+                            <p class="card-text">{{ service.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mt-5" id="skills">
+            <h1 class="text-center mb-4">Мои навыки</h1>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div v-for="(skill, index) in skills" :key="index" class="carousel-item" :class="{ active: index === 0 }">
+                        <img :src="skill.src" class="img-fluid" :alt="skill.description">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 text-dark">
+                            <p class="skill-description">{{ skill.description }}</p>
+                        </div>
+                    </div>
+                    </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="container mt-5" id="contact">
+            <h1 class="text-center mb-4">Мои контакты</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <li>Email: yasher18@bk.ru</li>
+                        <li>Phone: +7-(951)-086-14-27</li>
+                        <li>Telegram: 
+                            <a href="https://t.me/JSser1">JSser1</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-dark text-light py-3 mt-5">
+            <div class="container text-center">
+                <p>&copy; Web-Coder - 2024</p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        let app = new Vue({
+            el: "#app",
+            data: {
+                services: [
+                    { title: "Верстка сайтов", description: "разрабатываю адаптивные и красивые статические сайты под любые устройства на HTML, CSS, Bootstrap4 и Element UI" },
+                    { title: "Интерактивная разработка", description: "Я использую современные технологии для создания динамичных и интерактивных сайтов на JS и Vue.js" },
+                    { title: "python разработка", description: "разрабатываю математические приложения на Python для анализа мат. обработки и визуализации данных" }
+                ],
+                skills: [
+                    {
+                        src: "media/vue.png",
+                        description: 'Опыт работы с Vue.js для создания динамических и интерактивных интерфейсов.'
+                    },
+                    {
+                        src: "media/jquery.png",
+                        description: 'Знание jQuery для эффективной работы с DOM и взаимодействия с элементами.'
+                    },
+                    {
+                        src: "media/python.png",
+                        description: 'Опыт разработки на Python, включая работу с библиотеками машинного обучения.'
+                    }
+                ]
+            },
+        })
+    </script>
+
+</body>
+</html>
