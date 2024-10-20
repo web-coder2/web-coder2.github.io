@@ -110,9 +110,9 @@
         </nav>
 
         <section class="container mt-5" id="home">
-            <h1 class="text-center mb-4">Обо мне</h1>
+            <h1 class="text-center mb-4">О нас</h1>
             <p class="text-center">
-                Я молодой фронтенд разработчик с опытом 3 лет разработки клентских веб-приложений и веб сайтов разной сложности. увлекаюсь нейросетями и ИИ а также имел опыт разработки небольших моделей машинного обучения на python(scikit-learn)
+                Мы небольшая IT компания которая выполняет заказы по разработки <strong> веб-сайтов и клиентских веб-приложений любой сложности. </strong> Мы используем лучшие технологии для разработки приложений: HTML, CSS, JavaScript, Bootrstrap4, Vue.js, jQuery а также ведём разработку <strong> математических приложений на python </strong> для анализа, обработки и визуализации больших и эксперементальных данных!
             </p>
         </section>
 
@@ -162,8 +162,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul>
-                        <li>Email: yasher18@bk.ru</li>
-                        <li>Phone: +7-(951)-086-14-27</li>
+                        <li>Email:
+                            <a href="https://mail.ru">yasher18@bk.ru</a>
+                        </li>
+                        <li id="phone-number" onclick="copyPhoneNumber()">
+                            Phone: +7 (951) 086-14-27
+                            <div id="copy-message" class="mt-2 text-success" style="display: none;">
+                                Телефон скопирован!
+                            </div>
+                        </li>
                         <li>Telegram: 
                             <a href="https://t.me/JSser1">JSser1</a>
                         </li>
@@ -207,6 +214,27 @@
                 ]
             },
         })
+
+        function copyPhoneNumber() {
+            // Получаем номер телефона из элемента
+            var phoneNumber = document.getElementById('phone-number').textContent;
+
+            // Копируем номер в буфер обмена
+            navigator.clipboard.writeText("89510861427")
+                .then(() => {
+                    // Показываем сообщение об успешном копировании
+                    var copyMessage = document.getElementById('copy-message');
+                    copyMessage.style.display = 'block';
+
+                    setTimeout(() => {
+                        copyMessage.style.display = 'none';
+                    }, 1000);
+                })
+                .catch(err => {
+                    console.error('Не удалось скопировать номер телефона: ', err);
+                });
+        }
+
     </script>
 
 </body>
